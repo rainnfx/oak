@@ -1,33 +1,23 @@
-function createValidator(type: string) {
-  if (type === "string") {
-    return {
-      parse(data: unknown) {
-        if (typeof data === "string") {
-          return data;
-        } else {
-          throw new Error("oak error, expected string");
-        }
-      },
-    };
-  } else if (type === "number") {
-    return {
-      parse(data: unknown) {
-        if (typeof data === "number") {
-          return data;
-        } else {
-          throw new Error("oak error, expected number");
-        }
-      },
-    };
-  } else {
-    throw new Error("oak: invalid validation option");
-  }
+function createValidator<T>(type: string) {
+  return {
+    parse(data: unknown): T {
+      if (typeof data === type) {
+        return data as T;
+      } else {
+        throw new Error(`oak error, expected ${type}`);
+      }
+    },
+  };
 }
 
 export function string() {
-  return createValidator("string");
+  return createValidator<string>("string");
 }
 
 export function number() {
-  return createValidator("number");
+  return createValidator<number>("number");
+}
+
+export function boolean() {
+  return createValidator<boolean>("boolean");
 }

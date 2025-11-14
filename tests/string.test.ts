@@ -5,6 +5,7 @@ describe("string validation", () => {
   it("should pass for valid strings", () => {
     const schema = string();
     expect(schema.parse("hello")).toBe("hello");
+    const result = schema.parse("hello");
   });
 
   it("should throw for non-strings", () => {
