@@ -7,6 +7,13 @@ function createValidator<T>(type: string) {
         throw new Error(`oak error, expected ${type}`);
       }
     },
+    safeParse(data: unknown) {
+      if (typeof data === type) {
+        return { success: true, data: data as T };
+      } else {
+        return { success: false, error: Error(`oak error, expected ${data}`) };
+      }
+    },
   };
 }
 

@@ -8,6 +8,12 @@ describe("string validation", () => {
     const result = schema.parse("hello");
   });
 
+  it("should pass for valid strings under safeParse", () => {
+    const schema = string();
+    expect(schema.safeParse("hello")).toEqual({ data: "hello", success: true });
+    const result = schema.safeParse("hello");
+  });
+
   it("should throw for non-strings", () => {
     const schema = string();
     expect(() => schema.parse(123)).toThrow();

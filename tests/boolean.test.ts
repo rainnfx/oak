@@ -7,6 +7,16 @@ describe("boolean validation", () => {
     expect(schema.parse(true)).toBe(true);
   });
 
+  it("should pass for a valid boolean under safeParse", () => {
+    const schema = boolean();
+    expect(schema.safeParse(true)).toEqual({
+      data: true,
+      success: true,
+    });
+
+    expect(schema.safeParse(true));
+  });
+
   it("should throw for non-bools", () => {
     const schema = boolean();
     expect(() => schema.parse("what")).toThrow();
